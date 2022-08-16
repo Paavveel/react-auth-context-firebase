@@ -1,19 +1,24 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import Form from './Form';
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
   const { createUser } = useAuth();
 
-  const handleSignUp = (email, password) => {
-    const request = createUser(email, password);
-    toast.promise(request, {
-      loading: 'Loading...',
-      success: 'Your registration is successful',
-      error: error => error.message,
-    });
+  let from = location.state?.from?.pathname || '/account';
+
+  const handleSignUp = async (email, password) => {
+    try {
+      await createUser(email, password);
+      toast.success('Your registration is successful');
+      navigate(from, { replace: true });
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return (

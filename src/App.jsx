@@ -4,6 +4,7 @@ import Account from './components/Account';
 import SignIn from './components/SignIn';
 import SignUp from './components/SignUp';
 import { AuthProvider } from './context/AuthContext';
+import RequireAuth from './hoc/RequireAuth';
 
 function App() {
   return (
@@ -16,7 +17,14 @@ function App() {
         <Routes>
           <Route path='/' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
-          <Route path='/account' element={<Account />} />
+          <Route
+            path='/account'
+            element={
+              <RequireAuth>
+                <Account />
+              </RequireAuth>
+            }
+          />
         </Routes>
       </AuthProvider>
 

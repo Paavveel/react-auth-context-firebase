@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 
 function Form({ title, handleSubmit }) {
   const [email, setEmail] = useState('');
-  const [pass, setPass] = useState('');
+  const [password, setPassword] = useState('');
 
   return (
     <form
       onSubmit={e => {
         e.preventDefault();
-        handleSubmit(email, pass);
+        handleSubmit(email, password);
       }}
     >
       <div className='flex flex-col py-2'>
@@ -31,8 +31,8 @@ function Form({ title, handleSubmit }) {
           type='password'
           id='pass'
           className='border p-3'
-          value={pass}
-          onChange={e => setPass(e.target.value)}
+          value={password}
+          onChange={e => setPassword(e.target.value)}
         />
       </div>
       <button className='border border-blue-500 bg-blue-600 hover:bg-blue-500 w-full p-4 my-2 text-white'>
